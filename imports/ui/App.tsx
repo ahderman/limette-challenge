@@ -20,6 +20,10 @@ export const App = () => {
   }) as Task[];
   console.log('dbTasks:', dbTasks);
 
+  const nbIncompleteTasks = useTracker(() => {
+    return TasksCollection.find({ isCompleted: { $eq: false } }).count();
+  });
+
   async function handleTaskCompletionStatusChange(
     taskId: string,
     isCompleted: boolean
@@ -33,9 +37,12 @@ export const App = () => {
     await TasksCollection.removeAsync(_id);
   }
 
+  const nbIncompleteTasksText =
+    nbIncompleteTasks > 0 ? `(${nbIncompleteTasks})` : '';
+
   return (
     <div>
-      <h1>Welcome to Meteor!</h1>
+      <h1>LiMetTo {nbIncompleteTasksText}</h1>
 
       <TaskForm />
 

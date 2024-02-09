@@ -34,7 +34,7 @@ export const TaskForm = () => {
         value={inputText}
         onChange={handleInputChange}
       />
-      <button>Create task</button>
+      <button type="submit">Create task</button>
     </form>
   );
 };
