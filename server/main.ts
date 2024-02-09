@@ -1,9 +1,18 @@
 import { Meteor } from 'meteor/meteor';
 import { Link, LinksCollection } from '/imports/api/links';
+import { TasksCollection } from '/imports/api/TasksCollection';
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
 }
+
+Meteor.startup(async () => {
+  if (TasksCollection.find().count() === 0) {
+    await TasksCollection.insertAsync({ text: 'First task in DB' });
+    await TasksCollection.insertAsync({ text: 'Second task in DB' });
+    await TasksCollection.insertAsync({ text: 'Third task in DB' });
+  }
+});
 
 Meteor.startup(async () => {
   // If the Links collection is empty, add some data.

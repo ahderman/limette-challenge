@@ -1,11 +1,26 @@
 import React from 'react';
-import { Hello } from './Hello';
-import { Info } from './Info';
+import { TaskListItem } from '/imports/ui/TaskListItem';
+import { useTracker } from 'meteor/react-meteor-data';
+import { Task, TasksCollection } from '/imports/api/TasksCollection';
 
-export const App = () => (
-  <div>
-    <h1>Welcome to Meteor!</h1>
-    <Hello />
-    <Info />
-  </div>
-);
+const tasks = [
+  { _id: '1', text: 'first task' },
+  { _id: '2', text: 'second task' },
+  { _id: '3', text: 'third task' },
+];
+
+export const App = () => {
+  const dbTasks = useTracker(() => TasksCollection.find().fetch()) as Task[];
+  console.log('dbTasks:', dbTasks);
+
+  return (
+    <div>
+      <h1>Welcome to Meteor!</h1>
+      <ul>
+        {dbTasks.map((task) => (
+          <TaskListItem key={task._id} task={task} />
+        ))}
+      </ul>
+    </div>
+  );
+};
