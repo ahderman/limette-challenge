@@ -10,3 +10,7 @@ body {
 .task-list-item .delete-task-button {
   margin-left: 1rem;
 }
+
+.task-list-item .completed-task {
+  text-decoration: line-through;
+}

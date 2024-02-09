@@ -37,7 +37,9 @@ export const TaskListItem = ({
         checked={checkboxState}
         onChange={handleCheckboxChange}
       />
-      <span>{task.text}</span>
+      <span className={task.isCompleted ? 'completed-task' : ''}>
+        {task.text}
+      </span>
       <button className="delete-task-button" onClick={handleDeleteButtonClick}>
         🗑
       </button>
