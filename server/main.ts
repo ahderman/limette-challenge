@@ -8,9 +8,21 @@ async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
 
 Meteor.startup(async () => {
   if (TasksCollection.find().count() === 0) {
-    await TasksCollection.insertAsync({ text: 'First task in DB' });
-    await TasksCollection.insertAsync({ text: 'Second task in DB' });
-    await TasksCollection.insertAsync({ text: 'Third task in DB' });
+    await TasksCollection.insertAsync({
+      text: 'First task in DB',
+      createdAt: new Date(),
+      isCompleted: true,
+    });
+    await TasksCollection.insertAsync({
+      text: 'Second task in DB',
+      createdAt: new Date(),
+      isCompleted: false,
+    });
+    await TasksCollection.insertAsync({
+      text: 'Third task in DB',
+      createdAt: new Date(),
+      isCompleted: false,
+    });
   }
 });
 

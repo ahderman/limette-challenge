@@ -2,3 +2,11 @@ body {
   padding: 10px;
   font-family: sans-serif;
 }
+
+.task-form {
+  margin-top: 1rem;
+}
+
+.task-list-item .delete-task-button {
+  margin-left: 1rem;
+}
