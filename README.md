@@ -14,9 +14,12 @@ On page [2: Collections](https://react-tutorial.meteor.com/simple-todos/02-colle
   not being installed.
 - The link to the docs for React Hooks points to a legacy page: [Hooks FAQ](https://legacy.reactjs.org/docs/hooks-faq.html)
 
+Typings don't work for packages such as `meteor/accounts-base` and `meteor/react-meteor-data`.
+
 ## To read
 
 - https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
+- https://legacy.reactjs.org/docs/hooks-faq.html
 
 ## Learned
 
@@ -31,6 +34,8 @@ On page [2: Collections](https://react-tutorial.meteor.com/simple-todos/02-colle
 - Get rid of NewTask type if not needed
 - Name event handlers better
 - Add tests
+- Dockerize the application (split Mongo into its own process?)
+- Deploy the application
 - Internationalisation
 - Move CSS next to component
 - Promote CSS to Sass

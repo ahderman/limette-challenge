@@ -5,6 +5,7 @@ import { Mongo } from 'meteor/mongo';
 import { TaskListItem } from '/imports/ui/TaskListItem';
 import { Task, TasksCollection } from '/imports/api/TasksCollection';
 import { TaskForm } from '/imports/ui/TaskForm';
+import { LoginForm } from '/imports/ui/LoginForm';
 
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
@@ -43,6 +44,8 @@ export const App = () => {
   return (
     <div>
       <h1>LiMetTo {nbIncompleteTasksText}</h1>
+
+      <LoginForm />
 
       <TaskForm />
 

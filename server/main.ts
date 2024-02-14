@@ -1,10 +1,18 @@
 import { Meteor } from 'meteor/meteor';
+// @ts-ignore
+import { Accounts } from 'meteor/accounts-base';
 import { Link, LinksCollection } from '/imports/api/links';
 import { TasksCollection } from '/imports/api/TasksCollection';
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
 }
+
+Meteor.startup(async () => {
+  if (!Accounts.findUserByUsername('alex')) {
+    Accounts.createUser({ username: 'alex', password: 'ploup' });
+  }
+});
 
 Meteor.startup(async () => {
   if (TasksCollection.find().count() === 0) {
