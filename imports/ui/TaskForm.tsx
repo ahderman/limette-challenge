@@ -1,5 +1,6 @@
 import React, { ChangeEvent, FormEvent, useState } from 'react';
 import { TasksCollection } from '/imports/api/TasksCollection';
+import * as auth from '/imports/api/auth';
 
 export const TaskForm = () => {
   const [inputText, setInputText] = useState('');
@@ -14,6 +15,7 @@ export const TaskForm = () => {
     }
 
     await TasksCollection.insertAsync({
+      ownerId: auth.getCurrentUserId()!,
       text: inputText.trim(),
       createdAt: new Date(),
       isCompleted: false,

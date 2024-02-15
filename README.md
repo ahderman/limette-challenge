@@ -16,6 +16,10 @@ On page [2: Collections](https://react-tutorial.meteor.com/simple-todos/02-colle
 
 Typings don't work for packages such as `meteor/accounts-base` and `meteor/react-meteor-data`.
 
+On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos/07-adding-user-accounts):
+
+- `db.tasks.remove({})` is deprecated in MongoDB. We should now use `db.tasks.deleteMany({})`.
+
 ## To read
 
 - https://react-typescript-cheatsheet.netlify.app/docs/basic/setup

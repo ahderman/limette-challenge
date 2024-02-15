@@ -9,24 +9,34 @@ async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
 }
 
 Meteor.startup(async () => {
-  if (!Accounts.findUserByUsername('alex')) {
-    Accounts.createUser({ username: 'alex', password: 'ploup' });
+  let userId;
+  const user = Accounts.findUserByUsername('alex');
+  if (user) {
+    userId = user._id;
+  } else {
+    userId = await Accounts.createUserAsync({
+      username: 'alex',
+      password: 'ploup',
+    });
   }
-});
+  console.log('User: ', user);
+  console.log('UserId: ', userId);
 
-Meteor.startup(async () => {
   if (TasksCollection.find().count() === 0) {
     await TasksCollection.insertAsync({
+      ownerId: userId,
       text: 'First task in DB',
       createdAt: new Date(),
       isCompleted: true,
     });
     await TasksCollection.insertAsync({
+      ownerId: 'other-user',
       text: 'Second task in DB',
       createdAt: new Date(),
       isCompleted: false,
     });
     await TasksCollection.insertAsync({
+      ownerId: userId,
       text: 'Third task in DB',
       createdAt: new Date(),
       isCompleted: false,
