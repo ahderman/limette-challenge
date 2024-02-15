@@ -3,14 +3,25 @@ import { check } from 'meteor/check';
 import { TasksCollection } from '/imports/db/TasksCollection';
 
 function ensureUserIsLoggedIn(userId: string | null) {
-  if (!userId) {
+  if (userId === null) {
     throw new Meteor.Error('Not logged in');
+  }
+}
+
+async function ensureUserIsTaskOwner(userId: string, taskId: string) {
+  const task = await TasksCollection.findOneAsync({
+    _id: taskId,
+    ownerId: userId,
+  });
+
+  if (task === undefined) {
+    throw new Meteor.Error('Access denied');
   }
 }
 
 export function initializeTaskMethods(): void {
   Meteor.methods({
-    async 'tasks.insert'(text: string): Promise<void> {
+    async 'tasks.create'(text: string): Promise<void> {
       ensureUserIsLoggedIn(this.userId);
       check(text, String);
 
@@ -24,6 +35,7 @@ export function initializeTaskMethods(): void {
     async 'tasks.remove'(taskId: string): Promise<void> {
       ensureUserIsLoggedIn(this.userId);
       check(taskId, String);
+      await ensureUserIsTaskOwner(this.userId!, taskId);
 
       await TasksCollection.removeAsync(taskId);
     },
@@ -34,6 +46,7 @@ export function initializeTaskMethods(): void {
       ensureUserIsLoggedIn(this.userId);
       check(taskId, String);
       check(isCompleted, Boolean);
+      await ensureUserIsTaskOwner(this.userId!, taskId);
 
       await TasksCollection.updateAsync(taskId, { $set: { isCompleted } });
     },

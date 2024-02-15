@@ -8,12 +8,12 @@ export const TaskForm = () => {
     e: FormEvent<HTMLFormElement>
   ): Promise<void> {
     e.preventDefault();
-    console.log('inputText:', inputText);
+
     if (inputText.trim().length === 0) {
       return;
     }
 
-    await Meteor.call('tasks.insert', inputText.trim());
+    await Meteor.call('tasks.create', inputText.trim());
 
     setInputText('');
   }

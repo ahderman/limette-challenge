@@ -24,8 +24,6 @@ Meteor.startup(async () => {
       password: 'ploup',
     });
   }
-  console.log('User: ', user);
-  console.log('UserId: ', userId);
 
   if (TasksCollection.find().count() === 0) {
     await TasksCollection.insertAsync({
