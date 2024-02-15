@@ -8,7 +8,7 @@ function ensureUserIsLoggedIn(userId: string | null) {
   }
 }
 
-export function initializeMeteorMethods(): void {
+export function initializeTaskMethods(): void {
   Meteor.methods({
     async 'tasks.insert'(text: string): Promise<void> {
       ensureUserIsLoggedIn(this.userId);

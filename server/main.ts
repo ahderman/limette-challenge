@@ -3,9 +3,11 @@ import { Meteor } from 'meteor/meteor';
 import { Accounts } from 'meteor/accounts-base';
 import { Link, LinksCollection } from '/imports/api/links';
 import { TasksCollection } from '/imports/db/TasksCollection';
-import { initializeMeteorMethods } from '/imports/api/taskMethods';
+import { initializeTaskMethods } from '/imports/api/taskMethods';
+import { initializeTaskPublications } from '/imports/api/tasksPublications';
 
-initializeMeteorMethods();
+initializeTaskMethods();
+initializeTaskPublications();
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });

@@ -10,35 +10,39 @@ import { LoginForm } from '/imports/ui/LoginForm';
 import { LogoutButton } from '/imports/ui/LogoutButton';
 import * as auth from '/imports/api/auth';
 
+interface trackerReturnValue {
+  isLoading: boolean;
+  tasks: Task[] | undefined;
+  nbIncompleteTasks: number | undefined;
+}
+
 export const App = () => {
   const [hideCompleted, setHideCompleted] = useState(false);
 
   const isLoggedIn = useTracker(auth.isUserLoggedIn);
 
-  const dbTasks = useTracker(() => {
-    console.log('auth.getCurrentUser(): ', auth.getCurrentUser());
-    console.log('auth.getCurrentUserId(): ', auth.getCurrentUserId());
-    let queryFilter: Mongo.Selector<Task> = {
-      ownerId: auth.getCurrentUserId()!,
-    };
-    if (hideCompleted) {
-      queryFilter = {
-        ownerId: auth.getCurrentUserId()!,
-        isCompleted: { $eq: false },
-      };
-    }
-    return TasksCollection.find(queryFilter, {
-      sort: { createdAt: -1 },
-    }).fetch();
-  }) as Task[];
-  console.log('dbTasks:', dbTasks);
+  const { isLoading, tasks, nbIncompleteTasks }: trackerReturnValue =
+    useTracker(() => {
+      const handle = Meteor.subscribe('tasks');
 
-  const nbIncompleteTasks = useTracker(() => {
-    return TasksCollection.find({
-      ownerId: auth.getCurrentUserId()!,
-      isCompleted: { $eq: false },
-    }).count();
-  });
+      if (!handle.ready()) {
+        return { isLoading: true };
+      }
+
+      let queryFilter: Mongo.Selector<Task> = {};
+      if (hideCompleted) {
+        queryFilter = { isCompleted: { $eq: false } };
+      }
+      const tasks = TasksCollection.find(queryFilter, {
+        sort: { createdAt: -1 },
+      }).fetch();
+
+      const nbIncompleteTasks = TasksCollection.find({
+        isCompleted: { $eq: false },
+      }).count();
+
+      return { isLoading: false, tasks, nbIncompleteTasks };
+    });
 
   async function handleTaskCompletionStatusChange(
     taskId: string,
@@ -51,9 +55,6 @@ export const App = () => {
     await Meteor.call('tasks.remove', _id);
   }
 
-  const nbIncompleteTasksText =
-    nbIncompleteTasks > 0 ? `(${nbIncompleteTasks})` : '';
-
   return !isLoggedIn ? (
     <div>
       <h1>LiMetTo</h1>
@@ -61,9 +62,10 @@ export const App = () => {
     </div>
   ) : (
     <div>
-      <h1>LiMetTo {nbIncompleteTasksText}</h1>
-
+      <h1>LiMetTo {nbIncompleteTasks ? `(${nbIncompleteTasks})` : ''}</h1>
       <LogoutButton />
+
+      <div>{isLoading ? 'Loading...' : null}</div>
 
       <TaskForm />
 
@@ -72,14 +74,15 @@ export const App = () => {
       </button>
 
       <ul>
-        {dbTasks.map((task) => (
-          <TaskListItem
-            key={task._id}
-            task={task}
-            onTaskCompletionStatusChange={handleTaskCompletionStatusChange}
-            onTaskDeleteButtonClicked={handleTaskDeleteButtonClicked}
-          />
-        ))}
+        {tasks &&
+          tasks.map((task) => (
+            <TaskListItem
+              key={task._id}
+              task={task}
+              onTaskCompletionStatusChange={handleTaskCompletionStatusChange}
+              onTaskDeleteButtonClicked={handleTaskDeleteButtonClicked}
+            />
+          ))}
       </ul>
     </div>
   );
