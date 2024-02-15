@@ -45,3 +45,8 @@ On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos
 - Promote CSS to Sass
 - Add error handling on read/writes to the DB
 - Add input validation
+- Type as much as possible
+
+## Open questions
+
+- Why are so many functions not async? e.g. `Meteor.user()`, `Accounts.findUserByUsername()`

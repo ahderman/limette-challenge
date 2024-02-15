@@ -1,9 +1,10 @@
 import React, { useState } from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Mongo } from 'meteor/mongo';
 // @ts-ignore
 import { useTracker } from 'meteor/react-meteor-data';
 import { TaskListItem } from '/imports/ui/TaskListItem';
-import { Task, TasksCollection } from '/imports/api/TasksCollection';
+import { Task, TasksCollection } from '/imports/db/TasksCollection';
 import { TaskForm } from '/imports/ui/TaskForm';
 import { LoginForm } from '/imports/ui/LoginForm';
 import { LogoutButton } from '/imports/ui/LogoutButton';
@@ -43,13 +44,11 @@ export const App = () => {
     taskId: string,
     isCompleted: boolean
   ): Promise<void> {
-    await TasksCollection.updateAsync(taskId, {
-      $set: { isCompleted: isCompleted },
-    });
+    await Meteor.call('tasks.setIsCompleted', taskId, isCompleted);
   }
 
   async function handleTaskDeleteButtonClicked(_id: string): Promise<void> {
-    await TasksCollection.removeAsync(_id);
+    await Meteor.call('tasks.remove', _id);
   }
 
   const nbIncompleteTasksText =

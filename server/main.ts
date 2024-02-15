@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor';
 // @ts-ignore
 import { Accounts } from 'meteor/accounts-base';
 import { Link, LinksCollection } from '/imports/api/links';
-import { TasksCollection } from '/imports/api/TasksCollection';
+import { TasksCollection } from '/imports/db/TasksCollection';
+import { initializeMeteorMethods } from '/imports/api/taskMethods';
+
+initializeMeteorMethods();
 
 async function insertLink({ title, url }: Pick<Link, 'title' | 'url'>) {
   await LinksCollection.insertAsync({ title, url, createdAt: new Date() });
