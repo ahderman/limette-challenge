@@ -1,13 +1,21 @@
-describe('example to-do app', () => {
-  beforeEach(() => {
-    // Cypress starts out with a blank slate for each test
-    // so we must tell it to visit our website with the `cy.visit()` command.
-    // Since we want to visit the same URL at the start of all our tests,
-    // we include it in our beforeEach function so that it runs before each test
+const E2E_TEST_USERNAME = 'test-e2e';
+const E2E_TEST_PASSWORD = 'pass';
+
+describe('LiMetTe', () => {
+  it('should display the login screen when the user is not logged in', () => {
     cy.visit('/');
+    cy.get('[data-cy="login-form"]');
   });
 
-  it('', () => {
-    cy.get('h1').contains('LiMetTo');
+  it.skip('should display the main view when the user is logged in', () => {
+    cy.visit('/');
+
+    cy.get('[data-cy="login-form"]').within((form) => {
+      cy.get('input[name="username"]').type(E2E_TEST_USERNAME);
+      cy.get('input[name="password"]').type(E2E_TEST_PASSWORD);
+      cy.get('button').click();
+    });
+
+    cy.get('[data-cy="appointment-list"]');
   });
 });

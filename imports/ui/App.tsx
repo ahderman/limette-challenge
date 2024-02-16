@@ -57,12 +57,12 @@ export const App = () => {
 
   return !isLoggedIn ? (
     <div>
-      <h1>LiMetTo</h1>
+      <h1>LiMetTe</h1>
       <LoginForm />
     </div>
   ) : (
     <div>
-      <h1>LiMetTo {nbIncompleteTasks ? `(${nbIncompleteTasks})` : ''}</h1>
+      <h1>LiMetTe {nbIncompleteTasks ? `(${nbIncompleteTasks})` : ''}</h1>
       <LogoutButton />
 
       <div>{isLoading ? 'Loading...' : null}</div>

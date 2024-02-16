@@ -13,7 +13,7 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit}>
+    <form onSubmit={handleFormSubmit} data-cy="login-form">
       <label htmlFor="username">Username</label>
       <input type="text" name="username" required />
       <label htmlFor="password">Password</label>
