@@ -20,6 +20,18 @@ On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos
 
 - `db.tasks.remove({})` is deprecated in MongoDB. We should now use `db.tasks.deleteMany({})`.
 
+On page [12: Testing](https://react-tutorial.meteor.com/simple-todos/12-testing):
+
+- The database that gets used in tests seems to be the same as the one used in normal development
+- Function `mockMethodCall` from Meteor package `quave:testing` (which hasn't been updated in 3 years)
+  throws an error.
+- Calling any Chai function throws an error in the console after running the tests.
+
+On page [Testing, How to test your Meteor application](https://guide.meteor.com/testing.html):
+
+- It says any file with a name that matches `*.test[s].*`, or `*.spec[s].*` will be loaded automatically, but that
+  was not the case unless I removed the property `meteor.testModule` from the package.json.
+
 ## To read
 
 - https://react-typescript-cheatsheet.netlify.app/docs/basic/setup
@@ -31,8 +43,14 @@ On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos
 - the `autopublish` package automatically publishes the contents of the DB to the clients.  
   The clients can pick up the contents with the `useTracker` hook.
 
+## Cypress tests
+
+To make the Cypress tests work, I followed (roughly) the steps indicated in the following article:
+https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
+
 ## Future improvements
 
+- Document important scripts
 - Remove `console.log()` statements
 - Remove insecure and autopublish packages
 - Get rid of NewTask type if not needed

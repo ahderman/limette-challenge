@@ -21,16 +21,18 @@ async function ensureUserIsTaskOwner(userId: string, taskId: string) {
 
 export function initializeTaskMethods(): void {
   Meteor.methods({
-    async 'tasks.create'(text: string): Promise<void> {
+    async 'tasks.create'(text: string): Promise<string> {
       ensureUserIsLoggedIn(this.userId);
       check(text, String);
 
-      await TasksCollection.insertAsync({
+      const taskId = await TasksCollection.insertAsync({
         ownerId: this.userId!,
         text: text.trim(),
         createdAt: new Date(),
         isCompleted: false,
       });
+
+      return taskId;
     },
     async 'tasks.remove'(taskId: string): Promise<void> {
       ensureUserIsLoggedIn(this.userId);
