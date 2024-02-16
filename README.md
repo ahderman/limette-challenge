@@ -2,19 +2,31 @@
 
 Code for a web app for appointment scheduling, created for a hiring assignment for [Liris](https://liris.ch/).
 
-## Problems encountered while developing this app
+## How to run the application
+
+This command runs the application and makes it available at http://localhost:3000:
+
+`npm start`
+
+This command runs the e2e tests with Cypress (work in progress):
+
+`npm run e2e`
+
+Note: To make the Cypress tests work, I followed (roughly) the steps indicated in the following article:
+https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
+
+## Problems/surprises encountered while developing this app
 
 On page [1: Creating the app](https://react-tutorial.meteor.com/simple-todos/01-creating-app):
 
-- The Mobile view was actually find with Firefox
+- The Mobile view was actually fine with Firefox
 
 On page [2: Collections](https://react-tutorial.meteor.com/simple-todos/02-collections):
 
 - Running `meteor mongo` does not work and complains about [mongosh](https://www.mongodb.com/docs/mongodb-shell/)
   not being installed.
 - The link to the docs for React Hooks points to a legacy page: [Hooks FAQ](https://legacy.reactjs.org/docs/hooks-faq.html)
-
-Typings don't work for packages such as `meteor/accounts-base` and `meteor/react-meteor-data`.
+- Typings don't work for packages such as `meteor/accounts-base` and `meteor/react-meteor-data`.
 
 On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos/07-adding-user-accounts):
 
@@ -23,9 +35,7 @@ On page [7: Adding User Accounts](https://react-tutorial.meteor.com/simple-todos
 On page [12: Testing](https://react-tutorial.meteor.com/simple-todos/12-testing):
 
 - The database that gets used in tests seems to be the same as the one used in normal development
-- Function `mockMethodCall` from Meteor package `quave:testing` (which hasn't been updated in 3 years)
-  throws an error.
-- Calling any Chai function throws an error in the console after running the tests.
+- Calling any Chai function throws an error in the console when running the tests.
 
 On page [Testing, How to test your Meteor application](https://guide.meteor.com/testing.html):
 
@@ -43,16 +53,9 @@ On page [Testing, How to test your Meteor application](https://guide.meteor.com/
 - the `autopublish` package automatically publishes the contents of the DB to the clients.  
   The clients can pick up the contents with the `useTracker` hook.
 
-## Cypress tests
-
-To make the Cypress tests work, I followed (roughly) the steps indicated in the following article:
-https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
-
 ## Future improvements
 
 - Document important scripts
-- Remove `console.log()` statements
-- Remove insecure and autopublish packages
 - Get rid of NewTask type if not needed
 - Name event handlers better
 - Add tests
