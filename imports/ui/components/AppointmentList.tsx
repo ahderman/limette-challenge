@@ -9,12 +9,16 @@ import {
 } from '/imports/db/AppointmentCollection';
 import { AppointmentListItem } from '/imports/ui/components/AppointmentListItem';
 
+interface Props {
+  filterText: string;
+}
+
 interface TrackerReturnValue {
   isLoading: boolean;
   appointments: Appointment[] | undefined;
 }
 
-export const AppointmentList = () => {
+export const AppointmentList = ({ filterText }: Props) => {
   const { isLoading, appointments }: TrackerReturnValue = useTracker(() => {
     const handle = Meteor.subscribe('appointments');
 
@@ -23,7 +27,12 @@ export const AppointmentList = () => {
     }
 
     const appointments = AppointmentCollection.find(
-      {},
+      {
+        $or: [
+          { patientFirstName: { $regex: `^${filterText}`, $options: 'i' } },
+          { patientLastName: { $regex: `^${filterText}`, $options: 'i' } },
+        ],
+      },
       { sort: { date: 1 } }
     ).fetch();
 
