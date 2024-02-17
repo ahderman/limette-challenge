@@ -6,8 +6,8 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { TaskListItem } from '/imports/ui/TaskListItem';
 import { Task, TasksCollection } from '/imports/db/TasksCollection';
 import { TaskForm } from '/imports/ui/TaskForm';
-import { LoginForm } from '/imports/ui/LoginForm';
-import { LogoutButton } from '/imports/ui/LogoutButton';
+import { LoginForm } from '/imports/ui/components/LoginForm';
+import { LogoutButton } from '/imports/ui/components/LogoutButton';
 import * as auth from '/imports/api/auth';
 
 interface trackerReturnValue {

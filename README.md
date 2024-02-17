@@ -67,6 +67,8 @@ On page [Testing, How to test your Meteor application](https://guide.meteor.com/
 - Add error handling on read/writes to the DB
 - Add input validation
 - Type as much as possible
+- Add pagination to list of appointments
+- Do not show appointments in the past unless the user wants to
 
 ## Open questions
 

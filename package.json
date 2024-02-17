@@ -2,12 +2,12 @@
   "name": "limette-challenge",
   "private": true,
   "scripts": {
-    "start": "meteor run",
+    "start": "LIMETTE_ENVIRONMENT=dev meteor run",
     "lint": "eslint .",
     "test": "meteor test --once --driver-package meteortesting:mocha",
     "test-watch": "TEST_WATCH=1 meteor test --driver-package meteortesting:mocha",
     "test-app": "TEST_WATCH=1 meteor test --full-app --driver-package meteortesting:mocha",
-    "serve:e2e": "METEOR_LOCAL_DIR=.meteor/e2e DISABLE_REACT_FAST_REFRESH=1 meteor run --port 4000",
+    "serve:e2e": "LIMETTE_ENVIRONMENT=e2e METEOR_LOCAL_DIR=.meteor/e2e DISABLE_REACT_FAST_REFRESH=1 meteor run --port 4000",
     "e2e:headless": "cypress run --config-file e2e/cypress.config.ts",
     "e2e:gui": "cypress open --config-file e2e/cypress.config.ts",
     "e2e": "server-test serve:e2e 4000 e2e:headless",
@@ -32,6 +32,7 @@
     "eslint": "^8.56.0",
     "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-react": "^7.33.2",
+    "mongodb": "^6.3.0",
     "prettier": "^3.2.5",
     "start-server-and-test": "^2.0.3",
     "typescript": "^4.9.5"
