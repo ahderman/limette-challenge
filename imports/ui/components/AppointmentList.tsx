@@ -25,18 +25,22 @@ export const AppointmentList = ({ filterText }: Props) => {
     if (!handle.ready()) {
       return { isLoading: true };
     }
+    try {
+      const appointments = AppointmentCollection.find(
+        {
+          $or: [
+            { patientFirstName: { $regex: `^${filterText}`, $options: 'i' } },
+            { patientLastName: { $regex: `^${filterText}`, $options: 'i' } },
+          ],
+        },
+        { sort: { date: 1 } }
+      ).fetch();
 
-    const appointments = AppointmentCollection.find(
-      {
-        $or: [
-          { patientFirstName: { $regex: `^${filterText}`, $options: 'i' } },
-          { patientLastName: { $regex: `^${filterText}`, $options: 'i' } },
-        ],
-      },
-      { sort: { date: 1 } }
-    ).fetch();
-
-    return { isLoading: false, appointments };
+      return { isLoading: false, appointments };
+    } catch (e) {
+      console.error('An error occurred: ', e);
+      return { isLoading: false };
+    }
   });
 
   return (
