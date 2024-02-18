@@ -108,7 +108,7 @@ body {
   margin-bottom: 1rem;
 }
 
-.appointment-editor-container {
+.appointment-form-container {
   grid-row: 2;
   grid-column: 2;
 
@@ -122,22 +122,22 @@ body {
   flex-direction: column;
 }
 
-.appointment-editor-container h2 {
+.appointment-form-container h2 {
   text-align: center;
 }
 
-.appointment-editor-container form {
+.appointment-form-container form {
   display: flex;
   flex-direction: column;
 }
 
-.appointment-editor-container form span {
+.appointment-form-container form span {
   display: flex;
   padding: 0.5rem 0;
   gap: 0.5rem;
 }
 
-.appointment-editor-container label {
+.appointment-form-container label {
   min-width: 300px;
 }
 
@@ -160,7 +160,8 @@ body {
 
   padding: 1rem;
   border-radius: 8px;
-  border: 1px solid lightgray;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
+  background-color: white;
 }
 
 .login-form .username-label {

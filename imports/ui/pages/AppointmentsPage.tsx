@@ -4,10 +4,10 @@ import { useTracker } from 'meteor/react-meteor-data';
 
 import { LogoutButton } from '/imports/ui/components/LogoutButton';
 import { AppointmentListWithFilter } from '/imports/ui/components/AppointmentListWithFilter';
-import { AppointmentEditor } from '/imports/ui/components/AppointmentEditor';
+import { AppointmentCreator } from '/imports/ui/components/AppointmentCreator';
 import * as auth from '/imports/api/auth';
 import { Appointment } from '/imports/db/AppointmentCollection';
-import { AppointmentEditor2 } from '/imports/ui/components/AppointmentEditor2';
+import { AppointmentEditor } from '/imports/ui/components/AppointmentEditor';
 
 export const AppointmentsPage = () => {
   const currentUser = useTracker(auth.getCurrentUser);
@@ -36,13 +36,13 @@ export const AppointmentsPage = () => {
 
       <AppointmentListWithFilter onAppointmentSelect={onAppointmentSelect} />
       {selectedAppointment ? (
-        <AppointmentEditor2
+        <AppointmentEditor
           appointment={selectedAppointment}
           key={selectedAppointment._id}
           onCancel={() => setSelectedAppointment(undefined)}
         />
       ) : (
-        <AppointmentEditor />
+        <AppointmentCreator />
       )}
     </div>
   );
