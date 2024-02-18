@@ -8,6 +8,11 @@ export interface Appointment {
   date: Date;
 }
 
+export type NewAppointment = Omit<Appointment, '_id' | 'ownerId'> & {
+  _id?: string;
+  ownerId?: string;
+};
+
 export const AppointmentCollection = new Mongo.Collection<Appointment>(
   'appointments'
 );

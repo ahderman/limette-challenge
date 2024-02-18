@@ -5,6 +5,7 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { LogoutButton } from '/imports/ui/components/LogoutButton';
 import { AppointmentList } from '/imports/ui/components/AppointmentList';
 import { AppointmentFilter } from '/imports/ui/components/AppointmentFilter';
+import { AppointmentEditor } from '/imports/ui/components/AppointmentEditor';
 import * as auth from '/imports/api/auth';
 
 export const AppointmentsPage = () => {
@@ -24,6 +25,7 @@ export const AppointmentsPage = () => {
 
       <AppointmentFilter onFilterTextChange={setFilterText} />
       <AppointmentList filterText={filterText} />
+      <AppointmentEditor />
     </div>
   );
 };

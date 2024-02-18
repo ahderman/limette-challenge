@@ -1,5 +1,9 @@
 import { logInTestUser } from '/e2e/support/testHelpers';
 
+// Tests to be added:
+// - Ensure order of appointments is correct (earliest first)
+// - Ensure wrong regexp in search filter doesn't crash the application
+
 describe('appointments', () => {
   it('should only display appointments of the logged in user', () => {
     cy.task('clearDb');

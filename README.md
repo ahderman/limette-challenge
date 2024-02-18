@@ -15,6 +15,11 @@ This command runs the e2e tests with Cypress (work in progress):
 Note: To make the Cypress tests work, I followed (roughly) the steps indicated in the following article:
 https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
 
+## Decisions made while developing the application
+
+- Focus on testing
+- Filter implemented with a regexp. Not a good choice.
+
 ## Problems/surprises encountered while developing this app
 
 On page [1: Creating the app](https://react-tutorial.meteor.com/simple-todos/01-creating-app):
@@ -70,6 +75,7 @@ On page [Testing, How to test your Meteor application](https://guide.meteor.com/
 - Use React router
 - Add pagination to list of appointments
 - Do not show appointments in the past unless the user wants to
+- Throttle the onChange event on the filter, or add a Search button
 
 ## Open questions
 
