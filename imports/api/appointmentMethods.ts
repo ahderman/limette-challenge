@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import {
   AppointmentCollection,
-  NewAppointment,
+  AppointmentData,
 } from '/imports/db/AppointmentCollection';
 
 function ensureUserIsLoggedIn(userId: string | null) {
@@ -10,9 +10,23 @@ function ensureUserIsLoggedIn(userId: string | null) {
   }
 }
 
+async function ensureUserIsAppointmentOwner(
+  userId: string,
+  appointmentId: string
+) {
+  const appointment = await AppointmentCollection.findOneAsync({
+    _id: appointmentId,
+    ownerId: userId,
+  });
+
+  if (appointment === undefined) {
+    throw new Meteor.Error('Access denied');
+  }
+}
+
 export function initializeAppointmentMethods(): void {
   Meteor.methods({
-    async 'appointments.create'(appointmentData: NewAppointment) {
+    async 'appointments.create'(appointmentData: AppointmentData) {
       ensureUserIsLoggedIn(this.userId);
 
       const appointmentId = await AppointmentCollection.insertAsync({
@@ -23,6 +37,22 @@ export function initializeAppointmentMethods(): void {
       });
 
       return appointmentId;
+    },
+    async 'appointments.edit'(
+      appointmentId: string,
+      appointmentData: AppointmentData
+    ) {
+      ensureUserIsLoggedIn(this.userId);
+
+      await ensureUserIsAppointmentOwner(this.userId!, appointmentId);
+
+      await AppointmentCollection.updateAsync(appointmentId, {
+        $set: {
+          patientFirstName: appointmentData.patientFirstName,
+          patientLastName: appointmentData.patientLastName,
+          date: appointmentData.date,
+        },
+      });
     },
   });
 }

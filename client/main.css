@@ -10,7 +10,8 @@ body {
 }
 
 #react-target {
-  height: 100%;
+  min-height: 100%;
+  background-color: whitesmoke;
 }
 
 .task-form {
@@ -32,7 +33,12 @@ body {
 }
 
 .appointments-page header {
-  background-color: #e3ff5f;
+  background: linear-gradient(
+    135deg,
+    rgb(185, 201, 51) 0%,
+    rgb(227, 255, 95) 100%
+  );
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
   padding: 0 1rem;
   display: flex;
   grid-row: 1;
@@ -69,9 +75,10 @@ body {
   grid-column: 1;
 
   margin: 1rem;
-  border: 1px solid #e3ff5f;
   border-radius: 8px;
   padding: 1rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 }
 
 .appointment-list-with-filter h2 {
@@ -80,10 +87,17 @@ body {
 
 .appointment-list-item {
   display: flex;
-  padding: 1rem;
-  background-color: #e8e8e857;
+  padding: 0.5rem;
+  background-color: whitesmoke;
   margin: 5px 0;
   border-radius: 8px;
+  border: 1px solid #d6d9cf;
+
+  cursor: pointer;
+}
+
+.appointment-list-item:hover {
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 }
 
 .appointment-list-item-date {
@@ -99,9 +113,10 @@ body {
   grid-column: 2;
 
   margin: 1rem;
-  border: 1px solid #e3ff5f;
   border-radius: 8px;
   padding: 1rem;
+  background-color: white;
+  box-shadow: rgba(0, 0, 0, 0.16) 0 1px 4px;
 
   display: flex;
   flex-direction: column;

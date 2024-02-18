@@ -8,7 +8,7 @@ export interface Appointment {
   date: Date;
 }
 
-export type NewAppointment = Omit<Appointment, '_id' | 'ownerId'> & {
+export type AppointmentData = Omit<Appointment, '_id' | 'ownerId'> & {
   _id?: string;
   ownerId?: string;
 };

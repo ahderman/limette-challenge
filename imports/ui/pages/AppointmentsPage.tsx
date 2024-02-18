@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 // @ts-ignore
 import { useTracker } from 'meteor/react-meteor-data';
 
@@ -6,9 +6,18 @@ import { LogoutButton } from '/imports/ui/components/LogoutButton';
 import { AppointmentListWithFilter } from '/imports/ui/components/AppointmentListWithFilter';
 import { AppointmentEditor } from '/imports/ui/components/AppointmentEditor';
 import * as auth from '/imports/api/auth';
+import { Appointment } from '/imports/db/AppointmentCollection';
+import { AppointmentEditor2 } from '/imports/ui/components/AppointmentEditor2';
 
 export const AppointmentsPage = () => {
   const currentUser = useTracker(auth.getCurrentUser);
+  const [selectedAppointment, setSelectedAppointment] = useState<
+    Appointment | undefined
+  >();
+
+  function onAppointmentSelect(appointment: Appointment): void {
+    setSelectedAppointment(appointment);
+  }
 
   return (
     <div className="appointments-page">
@@ -25,8 +34,16 @@ export const AppointmentsPage = () => {
         <LogoutButton />
       </header>
 
-      <AppointmentListWithFilter />
-      <AppointmentEditor />
+      <AppointmentListWithFilter onAppointmentSelect={onAppointmentSelect} />
+      {selectedAppointment ? (
+        <AppointmentEditor2
+          appointment={selectedAppointment}
+          key={selectedAppointment._id}
+          onCancel={() => setSelectedAppointment(undefined)}
+        />
+      ) : (
+        <AppointmentEditor />
+      )}
     </div>
   );
 };

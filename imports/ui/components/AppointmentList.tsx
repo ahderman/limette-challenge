@@ -11,6 +11,7 @@ import { AppointmentListItem } from '/imports/ui/components/AppointmentListItem'
 
 interface Props {
   filterText: string;
+  onAppointmentSelect: (appointment: Appointment) => void;
 }
 
 interface TrackerReturnValue {
@@ -18,7 +19,7 @@ interface TrackerReturnValue {
   appointments: Appointment[] | undefined;
 }
 
-export const AppointmentList = ({ filterText }: Props) => {
+export const AppointmentList = ({ filterText, onAppointmentSelect }: Props) => {
   const { isLoading, appointments }: TrackerReturnValue = useTracker(() => {
     const handle = Meteor.subscribe('appointments');
 
@@ -51,6 +52,7 @@ export const AppointmentList = ({ filterText }: Props) => {
           appointments.map((appointment) => (
             <AppointmentListItem
               appointment={appointment}
+              onAppointmentSelect={onAppointmentSelect}
               key={appointment._id}
             />
           ))}
