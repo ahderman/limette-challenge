@@ -28,7 +28,7 @@ body {
 
 .appointments-page {
   display: grid;
-  grid-template-rows: 5rem auto;
+  grid-template-rows: 5rem auto auto;
   grid-template-columns: 1fr 1fr;
 }
 
