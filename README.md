@@ -60,19 +60,17 @@ On page [Testing, How to test your Meteor application](https://guide.meteor.com/
 
 ## Future improvements
 
-- Document important scripts
-- Get rid of NewTask type if not needed
-- Name event handlers better
-- Add tests
+- Refactor the AppointmentEditor and AppointmentCreator to use shared internals
+- Add global state/action management (Redux or similar)
+- Add page routing
+- Add more tests
 - Dockerize the application (split Mongo into its own process?)
 - Deploy the application
 - Internationalisation
-- Move CSS next to component
+- Move CSS closer to component
 - Promote CSS to Sass
-- Add error handling on read/writes to the DB
 - Add input validation
-- Add data validation to all data that gets saved in the DB
-- Use React router
+- Improve data validation to all data that gets saved in the DB
 - Add pagination to list of appointments
 - Do not show appointments in the past unless the user wants to
 - Throttle the onChange event on the filter, or add a Search button
