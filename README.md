@@ -4,11 +4,19 @@ Code for a web app for appointment scheduling, created for a hiring assignment f
 
 ## How to run the application
 
-This command runs the application and makes it available at http://localhost:3000:
+First, install all the necessary packages:
+
+`meteor npm install`
+
+Then run the application, which makes it available at http://localhost:3000:
 
 `npm start`
 
-This command runs the e2e tests with Cypress (work in progress):
+Then, log in as user "test1" or "test2". The password is "pw" for both users.
+
+## How to run the tests
+
+Run the e2e tests with Cypress:
 
 `npm run e2e`
 
@@ -17,8 +25,14 @@ https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
 
 ## Decisions made while developing the application
 
-- Focus on testing
+- Focus on making tests work
 - Filter implemented with a regexp. Not a good choice.
+- For such a simple application (login + one page) I did not use React Router, but if this were a real
+  application I would definitely add React Router from the start.
+- I did not add global event/state management either (like Redux, for example). As a result I have to pass
+  the appointment selection event all the way from the AppointmentListItem component up to the AppointmentsPage,
+  and then down to the AppointmentEditor component.  
+  In a real application, I would definitely introduce an extra dependency to simplify that pattern.
 
 ## Problems/surprises encountered while developing this app
 
