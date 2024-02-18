@@ -33,6 +33,8 @@ https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
   the appointment selection event all the way from the AppointmentListItem component up to the AppointmentsPage,
   and then down to the AppointmentEditor component.  
   In a real application, I would definitely introduce an extra dependency to simplify that pattern.
+- I decided to implement the appointment filter-by-name functionality using regular expressions as a first version,
+  but I don't think that is the right choice for such a widget.
 
 ## Problems/surprises encountered while developing this app
 
@@ -83,7 +85,6 @@ On page [Testing, How to test your Meteor application](https://guide.meteor.com/
 - Internationalisation
 - Move CSS closer to component
 - Promote CSS to Sass
-- Add input validation
 - Improve data validation to all data that gets saved in the DB
 - Add pagination to list of appointments
 - Do not show appointments in the past unless the user wants to
