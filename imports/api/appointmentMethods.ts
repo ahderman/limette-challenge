@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor';
+import { check } from 'meteor/check';
 import {
   AppointmentCollection,
   AppointmentData,
@@ -28,6 +29,9 @@ export function initializeAppointmentMethods(): void {
   Meteor.methods({
     async 'appointments.create'(appointmentData: AppointmentData) {
       ensureUserIsLoggedIn(this.userId);
+      check(appointmentData.patientFirstName, String);
+      check(appointmentData.patientLastName, String);
+      check(appointmentData.date, Date);
 
       const appointmentId = await AppointmentCollection.insertAsync({
         ownerId: this.userId!,
@@ -43,8 +47,10 @@ export function initializeAppointmentMethods(): void {
       appointmentData: AppointmentData
     ) {
       ensureUserIsLoggedIn(this.userId);
-
       await ensureUserIsAppointmentOwner(this.userId!, appointmentId);
+      check(appointmentData.patientFirstName, String);
+      check(appointmentData.patientLastName, String);
+      check(appointmentData.date, Date);
 
       await AppointmentCollection.updateAsync(appointmentId, {
         $set: {
