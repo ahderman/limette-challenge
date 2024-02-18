@@ -14,5 +14,9 @@ export const LogoutButton = () => {
   if (!isLoggedIn) {
     return null;
   }
-  return <button onClick={handleClick}>Log out</button>;
+  return (
+    <button className="header-logout-button" onClick={handleClick}>
+      Log out
+    </button>
+  );
 };

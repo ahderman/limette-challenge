@@ -24,17 +24,25 @@ export const AppointmentEditor = () => {
   }
 
   return (
-    <div>
+    <div className="appointment-editor-container">
       <h2>{title}</h2>
       <form onSubmit={handleFormSubmit}>
-        <label htmlFor="firstName">Patient's first name</label>
-        <input type="text" name="firstName" required />
-        <label htmlFor="lastName">Patient's last name</label>
-        <input type="text" name="lastName" required />
-        <label htmlFor="date">Appointment date</label>
-        <input type="date" name="date" required />
-        <input type="reset" value="Cancel" />
-        <button type="submit">Save</button>
+        <span>
+          <label htmlFor="firstName">Patient's first name</label>
+          <input type="text" name="firstName" required />
+        </span>
+        <span>
+          <label htmlFor="lastName">Patient's last name</label>
+          <input type="text" name="lastName" required />
+        </span>
+        <span>
+          <label htmlFor="date">Appointment date</label>
+          <input type="date" name="date" required />
+        </span>
+        <span>
+          <input type="reset" value="Cancel" />
+          <button type="submit">Save</button>
+        </span>
       </form>
     </div>
   );

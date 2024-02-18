@@ -23,16 +23,29 @@ export const LoginForm = () => {
   }
 
   return (
-    <form onSubmit={handleFormSubmit} data-cy="login-form">
+    <form
+      onSubmit={handleFormSubmit}
+      className="login-form"
+      data-cy="login-form"
+    >
       {loginError && (
         <div data-cy="login-error-message">
           <p>{loginError}</p>
         </div>
       )}
-      <label htmlFor="username">Username</label>
-      <input type="text" name="username" required />
-      <label htmlFor="password">Password</label>
-      <input type="password" name="password" required />
+      <label htmlFor="username" className="username-label">
+        Username
+      </label>
+      <input type="text" name="username" required className="username-input" />
+      <label htmlFor="password" className="password-label">
+        Password
+      </label>
+      <input
+        type="password"
+        name="password"
+        required
+        className="password-input"
+      />
       <button type="submit">Log in</button>
     </form>
   );

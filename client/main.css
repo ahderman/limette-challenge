@@ -1,6 +1,16 @@
+html {
+  height: 100%;
+}
+
 body {
-  padding: 10px;
   font-family: sans-serif;
+  font-size: 16px;
+  margin: 0;
+  height: 100%;
+}
+
+#react-target {
+  height: 100%;
 }
 
 .task-form {
@@ -13,4 +23,152 @@ body {
 
 .task-list-item .completed-task {
   text-decoration: line-through;
+}
+
+.appointments-page {
+  display: grid;
+  grid-template-rows: 5rem auto auto;
+  grid-template-columns: 1fr 1fr;
+}
+
+.appointments-page header {
+  background-color: #e3ff5f;
+  padding: 0 1rem;
+  display: flex;
+  grid-row: 1;
+  grid-column: 1 / -1;
+}
+
+.header-logo-wrapper {
+  flex-grow: 1;
+
+  /* To center the text vertically */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+
+.header-current-user-wrapper {
+  /* To center the text vertically */
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding-right: 1rem;
+}
+
+.header-logout-button {
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  font-family: sans-serif;
+  font-size: 16px;
+}
+
+.appointment-list-with-filter {
+  grid-row: 2 / -1;
+  grid-column: 1;
+
+  margin: 1rem;
+  border: 1px solid #e3ff5f;
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.appointment-list-with-filter h2 {
+  text-align: center;
+}
+
+.appointment-list-item {
+  display: flex;
+  padding: 1rem;
+  background-color: #e8e8e857;
+  margin: 5px 0;
+  border-radius: 8px;
+}
+
+.appointment-list-item-date {
+  min-width: 10rem;
+}
+
+.appointment-filter-container {
+  margin-bottom: 1rem;
+}
+
+.appointment-editor-container {
+  grid-row: 2;
+  grid-column: 2;
+
+  margin: 1rem;
+  border: 1px solid #e3ff5f;
+  border-radius: 8px;
+  padding: 1rem;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-editor-container h2 {
+  text-align: center;
+}
+
+.appointment-editor-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.appointment-editor-container form span {
+  display: flex;
+  padding: 0.5rem 0;
+  gap: 0.5rem;
+}
+
+.appointment-editor-container label {
+  min-width: 300px;
+}
+
+.login-page {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  height: 100%;
+}
+
+.login-form {
+  grid-row: 2;
+  grid-column: 2;
+  height: fit-content;
+
+  display: grid;
+  grid-template-columns: auto auto auto;
+  grid-template-rows: auto auto auto;
+  row-gap: 0.5rem;
+
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid lightgray;
+}
+
+.login-form .username-label {
+  grid-row: 1;
+  grid-column: 1;
+}
+
+.login-form .username-input {
+  grid-row: 1;
+  grid-column: 2 / -1;
+}
+
+.login-form .password-label {
+  grid-row: 2;
+  grid-column: 1;
+}
+
+.login-form .password-input {
+  grid-row: 2;
+  grid-column: 2 / -1;
+}
+
+.login-form button {
+  grid-row: 3;
+  grid-column: 3;
 }

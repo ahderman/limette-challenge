@@ -10,11 +10,13 @@ export const AppointmentFilter = ({ onFilterTextChange }: Props) => {
   }
 
   return (
-    <input
-      data-cy="appointment-filter"
-      type="text"
-      placeholder="Type here to filter"
-      onChange={handleInputChange}
-    />
+    <div className="appointment-filter-container">
+      <input
+        data-cy="appointment-filter"
+        type="text"
+        placeholder="Type here to filter"
+        onChange={handleInputChange}
+      />
+    </div>
   );
 };

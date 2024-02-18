@@ -44,8 +44,7 @@ export const AppointmentList = ({ filterText }: Props) => {
   });
 
   return (
-    <div data-cy="appointment-list">
-      <h2>Agenda</h2>
+    <div className="appointment-list-container" data-cy="appointment-list">
       {isLoading ? <div>Loading...</div> : null}
       <div>
         {appointments &&
