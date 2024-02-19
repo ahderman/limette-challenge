@@ -26,7 +26,6 @@ https://blog.meteor.com/testing-a-meteor-app-with-cypress-bfb3d3c6ed6f#744c
 ## Decisions made while developing the application
 
 - Focus on making tests work
-- Filter implemented with a regexp. Not a good choice.
 - For such a simple application (login + one page) I did not use React Router, but if this were a real
   application I would definitely add React Router from the start.
 - I did not add global event/state management either (like Redux, for example). As a result I have to pass
